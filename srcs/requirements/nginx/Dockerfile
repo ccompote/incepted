@@ -1,6 +1,6 @@
 FROM alpine:3.17
 
-RUN apk update && apk upgrade && apk add --no-cache nginx
+RUN apk update && apk upgrade && apk add --no-cache nginx openssl
 
 COPY requirements/nginx/conf/nginx.conf /etc/nginx/http.d/nginx.conf
 
