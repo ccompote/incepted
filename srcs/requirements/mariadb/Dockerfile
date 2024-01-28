@@ -13,7 +13,10 @@ RUN { echo '[mysqld]'; \
     } | tee  /etc/my.cnf.d/docker.cnf; \
     sed -i "s|skip-networking|skip-networking=0|g" \
       /etc/my.cnf.d/mariadb-server.cnf
-    
-CMD ["/bin/sh /tmp/create_db.sh"]
-ENTRYPOINT ["tail", "-f",  "/dev/null"]
 
+RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
+
+COPY requirements/mariadb/conf/create_db.sh .
+RUN sh create_db.sh && rm create_db.sh
+
+CMD ["/usr/bin/mysqld", "--skip-log-error"]
