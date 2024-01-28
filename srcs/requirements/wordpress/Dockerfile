@@ -15,6 +15,6 @@ COPY ./requirements/wordpress/conf/create_wp.sh .
 RUN chmod +x ./create_wp.sh
 
 EXPOSE 9000
-WORKDIR /var/www
+WORKDIR /var/www/html/wordpress
 
 ENTRYPOINT ["./create_wp.sh"]
