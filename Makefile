@@ -14,8 +14,8 @@ start:
 	@docker-compose -f ./srcs/docker-compose.yml start
 
 setup:
-	sudo mkdir -p /home/ccompote/data/db-data
-	sudo mkdir -p /home/ccompote/data/wp-data
+	sudo mkdir -p /home/${USER}/data/db-data
+	sudo mkdir -p /home/${USER}/data/wp-data
 
 clean:	down
 	@printf "Cleaning configuration...\n"
