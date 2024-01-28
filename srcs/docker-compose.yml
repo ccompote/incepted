@@ -1,0 +1,31 @@
+version: '3.5'
+
+services:
+  mariadb:
+    container_name: mariadb
+    volumes:
+      - wp-data/var/www/html
+    env_file:
+      - .env
+
+  wordpress:
+    container_name: wordpress
+    depends_on:
+      - mariadb
+    volumes:
+      - wp-data/var/www/html
+    env_file:
+      - .env
+
+  nginx:
+    container_name: nginx
+    ports:
+      - "443:443"
+    volumes:
+      - wp-data/var/www/html
+    depends_on:
+      -wordpress
+
+  volumes:
+    wp-data:
+    db-data
