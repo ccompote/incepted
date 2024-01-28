@@ -29,6 +29,7 @@ else
 	echo "GRANT ALL PRIVILEGES ON *.* TO '${WP_DB_USR}'@'%' IDENTIFIED BY '${WP_DB_PASS}';" >> ${TMP}
 	echo "FLUSH PRIVILEGES;" >> ${TMP}
 
+
 	/usr/bin/mysqld --user=mysql --bootstrap < ${TMP}
 	rm -f ${TMP}
 	echo "[DB config] MySQL configuration done."
