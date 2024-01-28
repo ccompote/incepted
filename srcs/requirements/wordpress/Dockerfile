@@ -1,6 +1,6 @@
 FROM alpine:3.16
 
-RUN apk --update add \
+RUN apk update && apk upgrade && apk add --no-cache\
     php8 \
     php8-fpm \
     php8-mysqli \
