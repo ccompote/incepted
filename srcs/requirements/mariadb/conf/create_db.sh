@@ -1,18 +1,5 @@
 #!/bin/sh
 
-echo "[DB config] Configuring MariaDB..."
-
-if [ ! -d "/run/mysqld" ]; then
-	echo "[DB config] Granting MariaDB daemon run permissions..."
-	mkdir -p /run/mysqld
-	chown -R mysql:mysql /run/mysqld
-fi
-
-if [ -d "/var/lib/mysql/wordpress" ]
-then
-	echo "[DB config] MariaDB already configured."
-else
-
 	echo "[DB config] Configuring MySQL..."
 	TMP=/tmp/.tmpfile
  
@@ -31,4 +18,3 @@ else
 	/usr/bin/mysqld --user=mysql --bootstrap < ${TMP}
 	rm -f ${TMP}
 	echo "[DB config] MySQL configuration done."
-fi
