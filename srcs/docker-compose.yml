@@ -30,4 +30,14 @@ services:
 
   volumes:
     wp-data:
-    db-data
+      driver_opts:
+        o: bind
+        device: /home/${USER}/data/wp-data
+    db-data:
+      driver_opts:
+        o: bind
+        device: /home/${USER}/data/db-data
+
+  networks:
+    inception:
+        driver: bridge
