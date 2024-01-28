@@ -13,7 +13,7 @@ WORKDIR /var/www/html/wordpress
 
 COPY ./requirements/wordpress/conf/create_wp.sh .
 
-RUN chmod +x /tmp/create_wp.sh
+RUN chmod +x ./create_wp.sh
 
 EXPOSE 9000
 
