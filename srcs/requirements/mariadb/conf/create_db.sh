@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if service mariadb start; then
+if service mysql start; then
 
     echo "INFO: Started MariaDB as a background service "
 
