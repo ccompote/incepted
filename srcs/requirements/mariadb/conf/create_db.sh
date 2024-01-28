@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 mkdir -p /run/mysqld
 chmod 0755 /run/mysqld
