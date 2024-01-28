@@ -14,8 +14,8 @@ start:
 	@docker-compose -f ./srcs/docker-compose.yml start
 
 setup:
-	sudo mkdir -p /home/ccompote/mariadb-data
-	sudo mkdir -p /home/ccompote/wordpress-data
+	sudo mkdir -p /home/ccompote/db-data
+	sudo mkdir -p /home/ccompote/wp-data
 
 clean:	down
 	@printf "Cleaning configuration...\n"
