@@ -14,6 +14,6 @@ wp-cli.phar config create --dbname="${WP_DB_NAME}" --dbuser="${WP_DB_USER}" --db
 
 wp-cli.phar core install --url="${HOSTNAME}/wordpress" --title="Inception" --admin_user="${WP_ADMIN_USER}" --admin_password="${WP_ADMIN_PASS}" --admin_email="${WP_ADMIN_EMAIL}" --path="/var/www/html/wordpress" --allow-root
 
-wp-cli.phar user create "${WP_USER}" "${WP_USER_EMAIL}" --user_pass="${WP_USER_PASS}" --role=subscriber --display_name="${WP_USER}" --porcelain --path="/var/www/html/wordpress" --allow-root
+wp-cli.phar user create "${WP_USR}" "${WP_USR_EMAIL}" --user_pass="${WP_USR_PASS}" --role=subscriber --display_name="${WP_USR}" --porcelain --path="/var/www/html/wordpress" --allow-root
 
 exec /usr/sbin/php-fpm8 -F -R
