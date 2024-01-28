@@ -30,6 +30,7 @@ GRANT ALL PRIVILEGES ON ${WP_DB_NAME}.* TO '${WP_DB_USR}'@'%' IDENTIFIED BY '${W
 FLUSH PRIVILEGES;
 EOF
 
+fi
     /usr/bin/mysqld --user=mysql --bootstrap < /tmp/mysql_setup.sql
     rm -f /tmp/mysql_setup.sql
 
