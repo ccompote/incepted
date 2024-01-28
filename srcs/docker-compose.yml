@@ -34,18 +34,18 @@ services:
     networks:
       - inception
 
-  volumes:
-    wp-data:
-      driver_opts:
-        o: bind
-        type: none
-        device: /home/${USER}/data/wordpress
-    db-data:
-      driver_opts:
-        o: bind
-        type: none
-        device: /home/${USER}/data/mariadb
+volumes:
+  wp-data:
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/${USER}/data/wp-data
+  db-data:
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/${USER}/data/db-data
 
-  networks:
-    inception:
-        driver: bridge
+networks:
+  inception:
+    driver: bridge
