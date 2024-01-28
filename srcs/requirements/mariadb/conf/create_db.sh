@@ -3,6 +3,19 @@
 chown -R mysql:mysql /var/lib/mysql
 mysql_install_db --basedir=/usr --datadir=/var/lib/mysql --user=mysql --rpm
 
+    sed -i '/\[client-server\]/a\
+            port = 3306\n\
+            # socket = /run/mysqld/mysqld.sock\n\
+            \n\
+            !includedir /etc/mysql/conf.d/\n\
+            !includedir /etc/mysql/mariadb.conf.d/\n\
+            \n\
+            [mysqld]\n\
+            user = root\n\
+            \n\
+            [server]\n\
+            bind-address = 0.0.0.0' /etc/mysql/my.cnf
+
     cat > /tmp/mysql_setup.sql <<EOF
 USE mysql;
 FLUSH PRIVILEGES;
