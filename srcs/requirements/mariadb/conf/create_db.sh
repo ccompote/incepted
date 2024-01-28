@@ -16,7 +16,7 @@ else
 
 	echo "[DB config] Configuring MySQL..."
 	TMP=/tmp/.tmpfile
-
+ 
 	echo "USE mysql;" > ${TMP}
 	echo "FLUSH PRIVILEGES;" >> ${TMP}
 	echo "DELETE FROM mysql.user WHERE User='';" >> ${TMP}
@@ -27,8 +27,8 @@ else
 	echo "CREATE DATABASE ${WP_DB_NAME};" >> ${TMP}
 	echo "CREATE USER '${WP_DB_USR}'@'%' IDENTIFIED BY '${WP_DB_PASS}';" >> ${TMP}
 	echo "GRANT ALL PRIVILEGES ON ${WP_DB_NAME}.* TO '${WP_DB_USR}'@'%' IDENTIFIED BY '${WP_DB_PASS}';" >> ${TMP}
+	echo "GRANT ALL PRIVILEGES ON *.* TO '${WP_DB_USR}'@'%';" >> ${TMP}
 	echo "FLUSH PRIVILEGES;" >> ${TMP}
-
 
 	/usr/bin/mysqld --user=mysql --bootstrap < ${TMP}
 	rm -f ${TMP}
