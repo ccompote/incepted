@@ -11,7 +11,7 @@ RUN apk update && apk upgrade && apk add --no-cache\
 
 WORKDIR /var/www/html/wordpress
 
-COPY ./requirements/mariadb/conf/create_wp.sh /usr/local/bin/create_wp.sh
+COPY ./requirements/wordpress/conf/create_wp.sh /usr/local/bin/create_wp.sh
 
 RUN chmod +x /usr/local/bin/create_wp.sh
 
