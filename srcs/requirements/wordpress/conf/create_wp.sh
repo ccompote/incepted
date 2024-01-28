@@ -3,21 +3,20 @@
 rm -rf /var/www/html/wordpress
 rm -f /usr/local/bin/wp
 
-
 sed -i 's/listen = 127.0.0.1:9000/listen = 9000/g' /etc/php8/php-fpm.d/www.conf
 
-curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar 
 chmod +x wp-cli.phar
-mv wp-cli.phar /usr/local/bin/wp
+mv wp-cli.phar /usr/bin/wp-cli.phar
 
-wp cli update --yes --allow-root
+wp-cli.phar cli update --yes --allow-root
 
-wp core download --allow-root
+wp-cli.phar core download --allow-root
 
-wp config create --dbname="$WP_DB_NAME" --dbuser="$WP_DB_USR" --dbpass="$WP_DB_PASS" --dbhost="$DB_HOSTNAME" --path="/var/www/html/wordpress" --allow-root
+wp-cli.phar config create --dbname="$WP_DB_NAME" --dbuser="$WP_DB_USR" --dbpass="$WP_DB_PASS" --dbhost="$DB_HOSTNAME" --path="/var/www/html/wordpress" --allow-root
 
-wp core install --url="$HOSTNAME/wordpress" --title="Inception" --admin_user="$WP_ADMIN_USR" --admin_password="$WP_ADMIN_PASS" --admin_email="$WP_ADMIN_EMAIL" --path="/var/www/html/wordpress" --allow-root
+wp-cli.phar core install --url="$HOSTNAME/wordpress" --title="Inception" --admin_user="$WP_ADMIN_USR" --admin_password="$WP_ADMIN_PASS" --admin_email="$WP_ADMIN_EMAIL" --path="/var/www/html/wordpress" --allow-root
 
-wp user create "$WP_USR" "$WP_USR_EMAIL" --user_pass="$WP_USR_PASS" --role=subscriber --display_name="$WP_USR" --porcelain --path="/var/www/html/wordpress" --allow-root
+wp-cli.phar user create "$WP_USR" "$WP_USR_EMAIL" --user_pass="$WP_USR_PASS" --role=subscriber --display_name="$WP_USR" --porcelain --path="/var/www/html/wordpress" --allow-root
 
 exec /usr/sbin/php-fpm8 -F -R
