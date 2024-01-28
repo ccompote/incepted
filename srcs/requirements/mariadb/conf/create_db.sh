@@ -1,46 +1,41 @@
 #!/bin/sh
 
+echo "[DB config] Configuring MariaDB..."
+
+# Set ownership of the MySQL data directory
 chown -R mysql:mysql /var/lib/mysql
 
-mysql_install_db --basedir=/usr --datadir=/var/lib/mysql --user=mysql
+if [ -d "/var/lib/mysql/mysql" ]
+then
+    echo "[DB config] MariaDB already configured."
+else
+    echo "[DB config] Installing MySQL Data Directory..."
+    mysql_install_db --basedir=/usr --datadir=/var/lib/mysql --user=mysql
+    echo "[DB config] MySQL Data Directory done."
 
-touch /etc/mysql/my.cnf
-# Update my.cnf file
-sed -i '/\[client-server\]/a\
-            port = 3306\n\
-            # socket = /run/mysqld/mysqld.sock\n\
-            \n\
-            !includedir /etc/mysql/conf.d/\n\
-            !includedir /etc/mysql/mariadb.conf.d/\n\
-            \n\
-            [mysqld]\n\
-            user = root\n\
-            \n\
-            [server]\n\
-            bind-address = 0.0.0.0' /etc/mysql/my.cnf
+    echo "[DB config] Configuring MySQL..."
+    TMP=/tmp/.tmpfile
 
-# Create SQL setup script
-cat > /tmp/mysql_setup.sql <<EOF
-USE mysql;
-FLUSH PRIVILEGES;
-DELETE FROM mysql.user WHERE User='';
-DROP DATABASE IF EXISTS test;
-DELETE FROM mysql.db WHERE Db='test';
-DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
-ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOTPASS}';
-CREATE DATABASE ${WP_DB_NAME};
-CREATE USER '${WP_DB_USR}'@'%' IDENTIFIED BY '${WP_DB_PASS}';
-GRANT ALL PRIVILEGES ON ${WP_DB_NAME}.* TO '${WP_DB_USR}'@'%' IDENTIFIED BY '${WP_DB_PASS}';
-FLUSH PRIVILEGES;
-EOF
+    echo "USE mysql;" > ${TMP}
+    echo "FLUSH PRIVILEGES;" >> ${TMP}
+    echo "DELETE FROM mysql.user WHERE User='';" >> ${TMP}
+    echo "DROP DATABASE IF EXISTS test;" >> ${TMP}
+    echo "DELETE FROM mysql.db WHERE Db='test';" >> ${TMP}
+    echo "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');" >> ${TMP}
+    echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOTPASS}';" >> ${TMP}
+    echo "CREATE DATABASE ${WP_DB_NAME};" >> ${TMP}
+    echo "CREATE USER '${WP_DB_USR}'@'%' IDENTIFIED BY '${WP_DB_PASS}';" >> ${TMP}
+    echo "GRANT ALL PRIVILEGES ON ${WP_DB_NAME}.* TO '${WP_DB_USR}'@'%' IDENTIFIED BY '${WP_DB_PASS}';" >> ${TMP}
+    echo "FLUSH PRIVILEGES;" >> ${TMP}
 
-# Bootstrap MariaDB with the setup script
-/usr/bin/mysqld --user=mysql --bootstrap < /tmp/mysql_setup.sql
-rm -f /tmp/mysql_setup.sql
+    /usr/bin/mysqld --user=mysql --bootstrap < ${TMP}
+    rm -f ${TMP}
+    echo "[DB config] MySQL configuration done."
+fi
 
-# Update MariaDB configuration
+echo "[DB config] Allowing remote connections to MariaDB"
 sed -i "s|skip-networking|# skip-networking|g" /etc/my.cnf.d/mariadb-server.cnf
 sed -i "s|.*bind-address\s*=.*|bind-address=0.0.0.0|g" /etc/my.cnf.d/mariadb-server.cnf
 
-# Start MariaDB
-exec /usr/bin/mysqld --user=mysql
+echo "[DB config] Starting MariaDB daemon on port 3306."
+exec /usr/bin/mysqld --user=mysql --console
