@@ -10,11 +10,11 @@ RUN apk update && apk upgrade && apk add --no-cache\
     && rm -rf /var/cache/apk/*
 
 
-COPY ./requirements/wordpress/conf/create_wp.sh /var/www/html/wordpress
+COPY ./requirements/wordpress/conf/create_wp.sh .
 
-RUN chmod +x ./var/www/html/wordpress/create_wp.sh
+RUN chmod +x ./create_wp.sh
 
 EXPOSE 9000
 WORKDIR /var/www/html/wordpress
 
-ENTRYPOINT ["./create_wp.sh"]
+ENTRYPOINT ["../../../../create_wp.sh"]
