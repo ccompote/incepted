@@ -12,7 +12,6 @@ if [ -d "/var/lib/mysql/wordpress" ]
 then
 	echo "[DB config] MariaDB already configured."
 else
-	mysql_install_db --basedir=/usr --datadir=/var/lib/mysql --user=mysql --rpm
 
 	echo "[DB config] Configuring MySQL..."
 	TMP=/tmp/.tmpfile
