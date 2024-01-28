@@ -12,11 +12,6 @@ if [ -d "/var/lib/mysql/mysql" ]
 then
 	echo "[DB config] MariaDB already configured."
 else
-	echo "[DB config] Installing MySQL Data Directory..."
-	chown -R mysql:mysql /var/lib/mysql
-	mysql_install_db --basedir=/usr --datadir=/var/lib/mysql --user=mysql --rpm > /dev/null
-	echo "[DB config] MySQL Data Directory done."
-
 	echo "[DB config] Configuring MySQL..."
 	TMP=/tmp/.tmpfile
 
