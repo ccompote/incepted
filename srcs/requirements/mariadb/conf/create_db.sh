@@ -3,7 +3,7 @@
 
 	echo "[DB config] Configuring MySQL..."
 	TMP=/tmp/.tmpfile
-
+	env
 	echo "USE mysql;" > ${TMP}
 	echo "FLUSH PRIVILEGES;" >> ${TMP}
 	echo "DELETE FROM mysql.user WHERE User='';" >> ${TMP}
