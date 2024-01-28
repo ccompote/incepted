@@ -71,8 +71,6 @@ echo "-------------------------------------------------"
 
 echo "INFO: Starting Mariadb daemon"
 
-print_error_log &
-
 echo "MARIADB ERRORS:"
 if mariadbd --bind-address=0.0.0.0; then
     echo "INFO: Started Mariadb daemon"
