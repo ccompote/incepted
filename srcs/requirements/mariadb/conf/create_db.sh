@@ -1,21 +1,28 @@
 #!/bin/sh
 
-	echo "[DB config] Configuring MySQL..."
- 
-HOST_IP=$(hostname -I | awk '{print $1}')
 
-# MySQL configuration commands
-/usr/bin/mysql --host=${HOST_IP} --port=3306 --user=root --password="${DB_ROOTPASS}" <<SQL_COMMANDS
-USE mysql;
-FLUSH PRIVILEGES;
-DELETE FROM mysql.user WHERE User='';
-DROP DATABASE IF EXISTS test;
-DELETE FROM mysql.db WHERE Db='test';
-DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
-ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOTPASS}';
-CREATE DATABASE ${WP_DB_NAME};
-CREATE USER '${WP_DB_USR}'@'%' IDENTIFIED BY '${WP_DB_PASS}';
-GRANT ALL PRIVILEGES ON ${WP_DB_NAME}.* TO '${WP_DB_USR}'@'%' IDENTIFIED BY '${WP_DB_PASS}';
-FLUSH PRIVILEGES;
-SQL_COMMANDS
+	echo "[DB config] Configuring MySQL..."
+	TMP=/tmp/.tmpfile
+
+	echo "USE mysql;" > ${TMP}
+	echo "FLUSH PRIVILEGES;" >> ${TMP}
+	echo "DELETE FROM mysql.user WHERE User='';" >> ${TMP}
+	echo "DROP DATABASE IF EXISTS test;" >> ${TMP}
+	echo "DELETE FROM mysql.db WHERE Db='test';" >> ${TMP}
+	echo "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');" >> ${TMP}
+	echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASS}';" >> ${TMP}
+	echo "CREATE DATABASE ${WP_DB_NAME};" >> ${TMP}
+	echo "CREATE USER '${WP_DB_USER}'@'%' IDENTIFIED BY '${WP_DB_PASS}';" >> ${TMP}
+	echo "GRANT ALL PRIVILEGES ON ${WP_DB_NAME}.* TO '${WP_DB_USER}'@'%' IDENTIFIED BY '${WP_DB_PASS}';" >> ${TMP}
+	echo "FLUSH PRIVILEGES;" >> ${TMP}
+
+	# Alpine does not come with service or rc-service,
+	# so we cannot use: service mysql start
+	# We might be able to install with: apk add openrc
+	# But we can also manually start and configure the mysql daemon:
+	/usr/bin/mysqld --user=mysql --bootstrap < ${TMP}
+	rm -f ${TMP}
 	echo "[DB config] MySQL configuration done."
+
+ sed -i "s|skip-networking|# skip-networking|g" /etc/my.cnf.d/mariadb-server.cnf
+sed -i "s|.*bind-address\s*=.*|bind-address=0.0.0.0|g" /etc/my.cnf.d/mariadb-server.cnf
