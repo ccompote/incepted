@@ -17,6 +17,6 @@ RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
 
 COPY ./requirements/mariadb/conf/create_db.sh /tmp/create_db.sh
 RUN chmod +x /tmp/create_db.sh
-RUN sh /tmp/create_db.sh && rm create_db.sh
+RUN sh /tmp/create_db.sh && rm /tmp/create_db.sh
 
 ENTRYPOINT ["/usr/bin/mysqld", "--user=mysql", "--console"]
