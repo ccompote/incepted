@@ -30,7 +30,7 @@ services:
     volumes:
       - wp-data/var/www/html
     depends_on:
-      -wordpress
+      - wordpress
     networks:
       - inception
 
