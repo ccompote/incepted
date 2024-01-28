@@ -14,7 +14,8 @@ services:
       - "3306:3306"
     networks:
       - inception
-
+    restart:
+      always
   wordpress:
     build:
       context: .
@@ -28,7 +29,9 @@ services:
       - .env
     networks:
       - inception
-
+    restart:
+      always
+    
   nginx:
     build:
       context: .
@@ -44,6 +47,8 @@ services:
       - inception
     env_file:
       - .env
+    restart:
+      always
 
 volumes:
   wp-data:
