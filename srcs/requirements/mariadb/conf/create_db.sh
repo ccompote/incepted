@@ -1,12 +1,7 @@
 #!/bin/sh
 
-        chown -R mysql:mysql /var/lib/mysql
-
-        # init database
-        mysql_install_db --basedir=/usr --datadir=/var/lib/mysql --user=mysql --rpm
-
-        tfile=`mktemp`
-
+chown -R mysql:mysql /var/lib/mysql
+mysql_install_db --basedir=/usr --datadir=/var/lib/mysql --user=mysql --rpm
 
     cat > /tmp/mysql_setup.sql <<EOF
 USE mysql;
