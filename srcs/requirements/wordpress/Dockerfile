@@ -9,12 +9,12 @@ RUN apk update && apk upgrade && apk add --no-cache\
     curl \
     && rm -rf /var/cache/apk/*
 
-WORKDIR /var/www
 
 COPY ./requirements/wordpress/conf/create_wp.sh .
 
 RUN chmod +x ./create_wp.sh
 
 EXPOSE 9000
+WORKDIR /var/www
 
 ENTRYPOINT ["./create_wp.sh"]
