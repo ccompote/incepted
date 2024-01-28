@@ -1,10 +1,11 @@
 name = Inception
+ENV_FILE := ./srcs/.env
 
 all: up
 
 up: setup
 	@printf "Building configuration...\n"
-	@docker-compose -f ./srcs/docker-compose.yml up -d --build
+	@docker-compose -f ./srcs/docker-compose.yml --env-file $(ENV_FILE) up -d --build
 
 down:
 	@printf "Stopping configuration...\n"
