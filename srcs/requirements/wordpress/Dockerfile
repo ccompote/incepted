@@ -9,7 +9,7 @@ RUN apk update && apk upgrade && apk add --no-cache\
     curl \
     && rm -rf /var/cache/apk/*
 
-WORKDIR /var/www/html/wordpress
+WORKDIR /var/www
 
 COPY ./requirements/wordpress/conf/create_wp.sh .
 
