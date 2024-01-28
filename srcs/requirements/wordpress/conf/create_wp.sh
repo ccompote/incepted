@@ -16,6 +16,4 @@ wp-cli.phar core install --url=${HOSTNAME}/wordpress --title="Inception" --admin
 
 wp-cli.phar user create $WP_USER ${WP_USER_EMAIL} --user_pass=${WP_USER_PASS} --role=subscriber --display_name=${WP_USER} --porcelain --path="/var/www/html/wordpress" --allow-root
 
-
-exit script with starting php-fpm:
 exec /usr/sbin/php-fpm8 -F -R
