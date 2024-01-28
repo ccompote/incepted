@@ -22,7 +22,7 @@ GRANT ALL PRIVILEGES ON ${WP_DB_NAME}.* TO '${WP_DB_USR}'@'%' IDENTIFIED BY '${W
 FLUSH PRIVILEGES;
 EOF
 
-    /usr/bin/mysqld --user=mysql --bootstrap < /tmp/mysql_setup.sql
+    /usr/bin/mysqld --user=mysql:mysql --bootstrap < /tmp/mysql_setup.sql
     rm -f /tmp/mysql_setup.sql
 
 sed -i "s|skip-networking|# skip-networking|g" /etc/my.cnf.d/mariadb-server.cnf
