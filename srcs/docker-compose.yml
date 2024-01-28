@@ -2,6 +2,9 @@ version: '3.5'
 
 services:
   mariadb:
+    build:
+      context: .
+      dockerfile: requirements/mariadb/Dockerfile
     container_name: mariadb
     volumes:
       - wp-data:/var/www/html
@@ -13,6 +16,9 @@ services:
       - inception
 
   wordpress:
+    build:
+      context: .
+      dockerfile: requirements/wordpress/Dockerfile
     container_name: wordpress
     depends_on:
       - mariadb
@@ -24,6 +30,9 @@ services:
       - inception
 
   nginx:
+    build:
+      context: .
+      dockerfile: requirements/nginx/Dockerfile
     container_name: nginx
     ports:
       - "443:443"
@@ -33,6 +42,8 @@ services:
       - wordpress
     networks:
       - inception
+    env_file:
+      - .env
 
 volumes:
   wp-data:
