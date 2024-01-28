@@ -10,9 +10,9 @@ wp-cli.phar cli update --yes --allow-root
 
 wp-cli.phar core download --allow-root
 
-wp-cli.phar config create --dbname="${WP_DB_NAME}" --dbuser="${WP_DB_USER}" --dbpass="${WP_DB_PASS}" --dbhost="${DB_HOSTNAME}" --path="/var/www/html/wordpress" --allow-root
+wp-cli.phar config create --dbname="${WP_DB_NAME}" --dbuser="${WP_DB_USR}" --dbpass="${WP_DB_PASS}" --dbhost="${DB_HOSTNAME}" --path="/var/www/html/wordpress" --allow-root
 
-wp-cli.phar core install --url="${HOSTNAME}/wordpress" --title="Inception" --admin_user="${WP_ADMIN_USER}" --admin_password="${WP_ADMIN_PASS}" --admin_email="${WP_ADMIN_EMAIL}" --path="/var/www/html/wordpress" --allow-root
+wp-cli.phar core install --url="${HOSTNAME}/wordpress" --title="Inception" --admin_user="${WP_ADMIN_USR}" --admin_password="${WP_ADMIN_PASS}" --admin_email="${WP_ADMIN_EMAIL}" --path="/var/www/html/wordpress" --allow-root
 
 wp-cli.phar user create "${WP_USR}" "${WP_USR_EMAIL}" --user_pass="${WP_USR_PASS}" --role=subscriber --display_name="${WP_USR}" --porcelain --path="/var/www/html/wordpress" --allow-root
 
