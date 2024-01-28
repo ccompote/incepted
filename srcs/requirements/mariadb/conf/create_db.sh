@@ -26,7 +26,7 @@ else
 	echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOTPASS}';" >> ${TMP}
 	echo "CREATE DATABASE ${WP_DB_NAME};" >> ${TMP}
 	echo "CREATE USER '${WP_DB_USR}'@'%' IDENTIFIED BY '${WP_DB_PASS}';" >> ${TMP}
-	echo "GRANT ALL PRIVILEGES ON *.* TO '${WP_DB_USR}'@'%' IDENTIFIED BY '${WP_DB_PASS}';" >> ${TMP}
+	echo "GRANT ALL PRIVILEGES ON ${WP_DB_NAME}.* TO '${WP_DB_USR}'@'%' IDENTIFIED BY '${WP_DB_PASS}';" >> ${TMP}
 	echo "FLUSH PRIVILEGES;" >> ${TMP}
 
 
