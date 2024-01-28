@@ -17,8 +17,8 @@
 	echo "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');" >> ${TMP}
 	echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '$DB_ROOT_PASS';" >> ${TMP}
 	echo "CREATE DATABASE $WP_DB_NAME;" >> ${TMP}
-	echo "CREATE USER '$WP_DB_USER'@'%' IDENTIFIED BY '$WP_DB_PASS}';" >> ${TMP}
-	echo "GRANT ALL PRIVILEGES ON *.* TO '$WP_DB_USER'@'%' IDENTIFIED BY '$WP_DB_PASS';" >> ${TMP}
+	echo "CREATE USER '$WP_DB_USR'@'%' IDENTIFIED BY '$WP_DB_PASS}';" >> ${TMP}
+	echo "GRANT ALL PRIVILEGES ON *.* TO '$WP_DB_USR'@'%' IDENTIFIED BY '$WP_DB_PASS';" >> ${TMP}
 	echo "FLUSH PRIVILEGES;" >> ${TMP}
 
 	# Alpine does not come with service or rc-service,
