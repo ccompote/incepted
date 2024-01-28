@@ -2,7 +2,7 @@
 
 	echo "[DB config] Configuring MySQL..."
  
-	/usr/bin/mysql --user=root <<SQL_COMMANDS
+	/usr/bin/mysql --host=mysql_container --port=3306 --user=root --password="${DB_ROOTPASS}" <<SQL_COMMANDS
 	USE mysql;
 	FLUSH PRIVILEGES;
 	DELETE FROM mysql.user WHERE User='';
@@ -15,7 +15,4 @@
 	GRANT ALL PRIVILEGES ON ${WP_DB_NAME}.* TO '${WP_DB_USR}'@'%' IDENTIFIED BY '${WP_DB_PASS}';
 	FLUSH PRIVILEGES;
 	SQL_COMMANDS
-
-	/usr/bin/mysqld --user=mysql --bootstrap < ${TMP}
-	rm -f ${TMP}
 	echo "[DB config] MySQL configuration done."
