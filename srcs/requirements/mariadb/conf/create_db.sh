@@ -3,7 +3,9 @@
 
 	echo "[DB config] Configuring MySQL..."
 	TMP=/tmp/.tmpfile
-	env
+
+ 	echo $WP_DB_NAME
+ 
 	echo "USE mysql;" > ${TMP}
 	echo "FLUSH PRIVILEGES;" >> ${TMP}
 	echo "DELETE FROM mysql.user WHERE User='';" >> ${TMP}
