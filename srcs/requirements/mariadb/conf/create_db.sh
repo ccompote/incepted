@@ -3,6 +3,7 @@
 echo "[DB config] Configuring MariaDB..."
 
 # Set ownership of the MySQL data directory
+mkdir /var/lib/mysql
 chown -R mysql:mysql /var/lib/mysql
 
 if [ -d "/var/lib/mysql/mysql" ]
