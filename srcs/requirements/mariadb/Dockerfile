@@ -16,7 +16,9 @@ RUN mkdir /var/run/mysqld; \
     sed -i "s|skip-networking|skip-networking=0|g" \
       /etc/my.cnf.d/mariadb-server.cnf
 
-      
+EXPOSE 3306
+
+USER mysql      
 CMD ["/bin/sh /tmp/create_db.sh"]
 ENTRYPOINT ["tail", "-f",  "/dev/null"]
 
