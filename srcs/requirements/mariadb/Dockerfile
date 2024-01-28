@@ -6,6 +6,6 @@ COPY ./requirements/mariadb/conf/create_db.sh /tmp/create_db.sh
 
 RUN chmod +x /tmp/create_db.sh
 
-#ENTRYPOINT ["tail", "-f",  "/dev/null"]
-ENTRYPOINT ["/bin/sh", "/tmp/create_db.sh"]
+ENTRYPOINT ["tail", "-f",  "/dev/null"]
+#ENTRYPOINT ["/bin/sh", "/tmp/create_db.sh"]
 
