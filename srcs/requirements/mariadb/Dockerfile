@@ -6,4 +6,4 @@ COPY conf/create_db.sh /usr/local/bin/create_db.sh
 
 RUN chmod +x /usr/local/bin/create_db.sh
 
-ENTRYPOINT create_db.sh
+ENTRYPOINT ["/usr/local/bin/create_db.sh"]
