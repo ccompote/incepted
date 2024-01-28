@@ -2,7 +2,7 @@
 
 	echo "[DB config] Configuring MySQL..."
  
-	/usr/bin/mysql --host=mysql_container --port=3306 --user=root --password="${DB_ROOTPASS}" <<SQL_COMMANDS
+	/usr/bin/mysql --host=mariadb --port=3306 --user=root --password="${DB_ROOTPASS}" <<SQL_COMMANDS
 	USE mysql;
 	FLUSH PRIVILEGES;
 	DELETE FROM mysql.user WHERE User='';
