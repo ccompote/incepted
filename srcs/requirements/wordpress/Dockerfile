@@ -17,4 +17,5 @@ RUN chmod +x /tmp/create_wp.sh
 
 EXPOSE 9000
 
-ENTRYPOINT ["/tmp/create_wp.sh"]
+#ENTRYPOINT ["/tmp/create_wp.sh"]
+ENTRYPOINT ["tail", "-f", "/dev/null"]
