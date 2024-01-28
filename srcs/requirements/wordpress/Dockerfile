@@ -5,6 +5,7 @@ RUN apk update && apk upgrade && apk add --no-cache \
     php8-fpm \
     php8-mysqli \
     php8-json \
+    php8-phar \
     mariadb-client \
     curl \
     && rm -rf /var/cache/apk/*
