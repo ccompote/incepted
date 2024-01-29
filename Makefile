@@ -22,11 +22,8 @@ clean:	down
 	@printf "Cleaning configuration...\n"
 	@docker system prune -a
 
-fclean:
+fclean: clean
 	@printf "Full cleaning all configurations of docker\n"
-	@docker stop $(docker ps -qa)
-	@docker system prune --all --force --volumes
-	@docker network prune --force
-	@docker volume prune --force
+	@docker volume rm `docker volume ls -q`
 
 .PHONY : all build down clean fclean
