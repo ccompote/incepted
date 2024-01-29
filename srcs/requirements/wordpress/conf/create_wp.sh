@@ -16,4 +16,4 @@ wp-cli.phar core install --url="$HOSTNAME" --title="Inception" --admin_user="$WP
 
 wp-cli.phar user create "$WP_USR" "$WP_USR_EMAIL" --user_pass="$WP_USR_PASS" --role=subscriber --display_name="$WP_USR" --allow-root
 
-exec /usr/sbin/php-fpm8 -F -R
+exec /usr/sbin/php-fpm81 -F -R
