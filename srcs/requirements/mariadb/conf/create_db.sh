@@ -16,10 +16,7 @@
 	echo "GRANT ALL PRIVILEGES ON *.* TO '$WP_DB_USR'@'%' IDENTIFIED BY '$WP_DB_PASS';" >> ${TMP}
 	echo "FLUSH PRIVILEGES;" >> ${TMP}
 
-	# Alpine does not come with service or rc-service,
-	# so we cannot use: service mysql start
-	# We might be able to install with: apk add openrc
-	# But we can also manually start and configure the mysql daemon:
+	# manually start and configure the mysql daemon:
 	/usr/bin/mysqld --user=mysql --bootstrap < ${TMP}
 	rm -f ${TMP}
 	echo "[DB config] MySQL configuration done."
