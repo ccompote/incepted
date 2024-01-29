@@ -14,8 +14,6 @@ services:
       - "3306:3306"
     networks:
       - inception
-    depends_on:
-      - nginx
     restart:
       always
   wordpress:
@@ -45,6 +43,8 @@ services:
       - wp-data:/var/www/html
     networks:
       - inception
+    depends_on:
+      - wordpress
     env_file:
       - .env
     restart:
