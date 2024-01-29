@@ -14,7 +14,8 @@ services:
       - "3306:3306"
     networks:
       - inception
-    depends_on: nginx
+    depends_on:
+      - nginx
     restart:
       always
   wordpress:
