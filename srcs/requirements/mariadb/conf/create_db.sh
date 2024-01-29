@@ -4,11 +4,6 @@
 	echo "[DB config] Configuring MySQL..."
 	TMP=/tmp/.tmpfile
 
-
- 	echo $WP_DB_NAME
- 	echo $WP_DB_USER
- 	echo $WP_DB_PASS
- 	echo $DB_ROOTPASS
 	echo "USE mysql;" > ${TMP}
 	echo "FLUSH PRIVILEGES;" >> ${TMP}
 	echo "DELETE FROM mysql.user WHERE User='';" >> ${TMP}
