@@ -1,13 +1,13 @@
 FROM alpine:3.18
 
 RUN apk update && apk upgrade && apk add --no-cache \
-    php8 \
-    php8-fpm \
-    php8-mysqli \
-    php8-json \
-    php8-phar \
-    php8-openssl \
-    php8-mbstring \
+    php81 \
+    php81-fpm \
+    php81-mysqli \
+    php81-json \
+    php81-phar \
+    php81-openssl \
+    php81-mbstring \
     mariadb-client \
     curl \
     && rm -rf /var/cache/apk/*
